@@ -1,4 +1,4 @@
-package acptTests.showSystem;
+package showSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class City {
         admins = new ArrayList<Admin>();
     }
 
-    public void addHall(String hall, int sits){
+    public void addHall(String hall, int[] sits){
         halls.add(new Hall(hall, sits));
     }
 
@@ -40,5 +40,9 @@ public class City {
 
     public String getName() {
         return name;
+    }
+
+    public List<Hall> getHalls() {
+        return halls;
     }
 }
