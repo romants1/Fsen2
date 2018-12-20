@@ -1,4 +1,5 @@
 package showSystem;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hall {
@@ -9,6 +10,7 @@ public class Hall {
     public Hall(String name, int[] sits){
         this.name = name;
         this.seats = sits;
+        shows = new ArrayList<Show>();
     }
 
     public String getName() {

@@ -14,7 +14,7 @@ public class Show {
     private boolean includesTime;
     private int showID;
     private List<Order> notifyList;
-    private List freeSeats;
+    private List<Integer> freeSeats;
 
     public Show(String name, String show_info, long lastOrderDate, long showDate, double price, boolean includesTime, int minutesTime, int hourTime ){
         this.name = name;
@@ -28,6 +28,7 @@ public class Show {
             this.showTime = LocalTime.of(hourTime, minutesTime);
         else
             this.showTime = null;
+        freeSeats = new ArrayList<Integer>();
     }
 
     public String getName() {
@@ -63,11 +64,21 @@ public class Show {
         this.freeSeats = freeSeats;
     }
 
-    public List getFreeSeats() {
+    public List<Integer> getFreeSeats() {
         return freeSeats;
     }
 
     public LocalTime getShowTime() {
         return showTime;
+    }
+
+    public List<Order> getNotifyList() {
+        return notifyList;
+    }
+
+    public void reserveSeats(int[] chosenSeats) {
+        for (Integer i: chosenSeats) {
+            freeSeats.remove(i);
+        }
     }
 }

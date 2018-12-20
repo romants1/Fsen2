@@ -22,6 +22,14 @@ public class Order {
         return userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
     public int[] getSeats() {
         return seats;
     }
