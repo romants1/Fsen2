@@ -30,16 +30,16 @@ public class ShowSystem  {
             c.addAdmin(user, pass);
     }
 
-    public boolean addShow(String user, String pass, Show show, String city, String hall) {
+    public int addShow(String user, String pass, Show show, String city, String hall) {
         City c = findCity(city);
         Hall h = c.findHall(hall);
         if((c != null) && c.isAdmin(user,pass) && (h != null) && (show.getLastOrderDate() < show.getShowDate()) && checkTime(show)){
             show.setShowID(showId++);
             show.setFreeSeats(Arrays.asList(h.getSits()));
             h.addShow(show);
-            return true;
+            return showId - 1;
         }
-        return false;
+        return 0;
     }
 
     private boolean checkTime(Show show) {
@@ -57,7 +57,7 @@ public class ShowSystem  {
         return "Order Succeeded: Seats are reserved, the payment is made through a phone call to 012-3456789 ";
     }
 
-    private void reserveSeats(Order order, Show show) {
+    public void reserveSeats(Order order, Show show) {
         List freeSeats = show.getFreeSeats();
         for (int i: order.getSeats()) {
             freeSeats.remove(i);
@@ -85,7 +85,7 @@ public class ShowSystem  {
         return null;
     }
 
-    private Show findShow (int id){
+    public Show findShow (int id){
         for (City c: cities) {
             for (Hall h: c.getHalls()) {
                 Show s = h.findShow(id);

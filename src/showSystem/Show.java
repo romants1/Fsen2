@@ -5,23 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Show {
-    private  String name;
-    private String description;
+    private String name;
+    private String show_info;
     private long lastOrderDate;
     private long showDate;
     private LocalTime showTime;
-    private double ticketCost;
+    private double price;
     private boolean includesTime;
     private int showID;
     private List<Order> notifyList;
     private List freeSeats;
 
-    public Show(String name, String description, long lastOrderDate, long showDate, double ticketCost, boolean includesTime, int minutesTime, int hourTime ){
+    public Show(String name, String show_info, long lastOrderDate, long showDate, double price, boolean includesTime, int minutesTime, int hourTime ){
         this.name = name;
-        this.description = description;
+        this.show_info = show_info;
         this.lastOrderDate = lastOrderDate;
         this.showDate = showDate;
-        this.ticketCost = ticketCost;
+        this.price = price;
         this.includesTime = includesTime;
         this.notifyList = new ArrayList<>();
         if(minutesTime != -1 && hourTime != -1)

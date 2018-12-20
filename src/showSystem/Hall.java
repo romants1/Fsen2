@@ -3,12 +3,12 @@ import java.util.List;
 
 public class Hall {
     private String name;
-    private int[] sits;
+    private int[] seats;
     private List<Show> shows;
 
     public Hall(String name, int[] sits){
         this.name = name;
-        this.sits = sits;
+        this.seats = sits;
     }
 
     public String getName() {
@@ -16,7 +16,7 @@ public class Hall {
     }
 
     public int[] getSits() {
-        return sits;
+        return seats;
     }
 
     public void addShow(Show show){
