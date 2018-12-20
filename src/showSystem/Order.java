@@ -1,5 +1,4 @@
 package showSystem;
-
 public class Order {
     private String userName;
     private String phoneNum;
@@ -21,5 +20,9 @@ public class Order {
 
     public int getUserId() {
         return userId;
+    }
+
+    public int[] getSeats() {
+        return seats;
     }
 }

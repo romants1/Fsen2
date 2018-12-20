@@ -1,9 +1,7 @@
 package showSystem;
-import acptTests.data.OrderInfo;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 
 public class Show {
@@ -11,11 +9,12 @@ public class Show {
     private String description;
     private long lastOrderDate;
     private long showDate;
-    public LocalTime showTime;
+    private LocalTime showTime;
     private double ticketCost;
     private boolean includesTime;
     private int showID;
-    private List<Order> notifyList = new ArrayList<>();
+    private List<Order> notifyList;
+    private List freeSeats;
 
     public Show(String name, String description, long lastOrderDate, long showDate, double ticketCost, boolean includesTime, int minutesTime, int hourTime ){
         this.name = name;
@@ -24,7 +23,8 @@ public class Show {
         this.showDate = showDate;
         this.ticketCost = ticketCost;
         this.includesTime = includesTime;
-        if(minutesTime == -1 || hourTime == -1)
+        this.notifyList = new ArrayList<>();
+        if(minutesTime != -1 && hourTime != -1)
             this.showTime = LocalTime.of(hourTime, minutesTime);
         else
             this.showTime = null;
@@ -55,8 +55,19 @@ public class Show {
     }
 
     public void addToNotifyList(Order order){
-        notifyList.add(order);
+        if(!notifyList.contains(order))
+            notifyList.add(order);
     }
 
+    public void setFreeSeats(List freeSeats) {
+        this.freeSeats = freeSeats;
+    }
 
+    public List getFreeSeats() {
+        return freeSeats;
+    }
+
+    public LocalTime getShowTime() {
+        return showTime;
+    }
 }

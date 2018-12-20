@@ -1,7 +1,4 @@
 package showSystem;
-
-
-
 import java.util.List;
 
 public class Hall {

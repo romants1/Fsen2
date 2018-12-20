@@ -1,8 +1,8 @@
 package showSystem;
-
 import acptTests.data.OrderInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ShowSystem  {
@@ -30,11 +30,12 @@ public class ShowSystem  {
             c.addAdmin(user, pass);
     }
 
-    public boolean addShow(String user, String pass,Show show, String city, String hall) {
+    public boolean addShow(String user, String pass, Show show, String city, String hall) {
         City c = findCity(city);
         Hall h = c.findHall(hall);
         if((c != null) && c.isAdmin(user,pass) && (h != null) && (show.getLastOrderDate() < show.getShowDate()) && checkTime(show)){
             show.setShowID(showId++);
+            show.setFreeSeats(Arrays.asList(h.getSits()));
             h.addShow(show);
             return true;
         }
@@ -42,33 +43,39 @@ public class ShowSystem  {
     }
 
     private boolean checkTime(Show show) {
-        return (show.isIncludesTime())? (show.showTime != null) : (show.showTime == null);
+        return (show.isIncludesTime())? (show.getShowTime() != null) : (show.getShowTime() == null);
     }
 
     public String orderShow(Order order){
         Show show = findShow(order.getShowId());
+        if(System.currentTimeMillis() > show.getLastOrderDate())
+            return "Order Failed: Can't order after last order date, the seats are not reserved";
         show.addToNotifyList(order);
         if(order.getUserId() != -1){
             reserveSeats(order, show);
         }
-        return null;
+        return "Order Succeeded: Seats are reserved, the payment is made through a phone call to 012-3456789 ";
     }
 
     private void reserveSeats(Order order, Show show) {
-        show.
+        List freeSeats = show.getFreeSeats();
+        for (int i: order.getSeats()) {
+            freeSeats.remove(i);
+        }
+        show.setFreeSeats(freeSeats);
     }
 
 
-    public void reserveMemberChairs(int showID, int from, int to) {
-    }
-
-    public int newOrder(OrderInfo order) {
-        return 0;
-    }
-
-    public List<OrderInfo> getWaitings(int id) {
-        return null;
-    }
+//    public void reserveMemberChairs(int showID, int from, int to) {
+//    }
+//
+//    public int newOrder(OrderInfo order) {
+//        return 0;
+//    }
+//
+//    public List<OrderInfo> getWaitings(int id) {
+//        return null;
+//    }
 
     private City findCity(String city){
         for (City c: cities) {
